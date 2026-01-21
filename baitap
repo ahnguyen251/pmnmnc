@@ -1,0 +1,14 @@
+#tính theo deadline
+22.1/26
+Tạo project laravel, tạo repo github,đẩy project( bỏ env)
+Viết các route xử lý các yêu cầu sau
+"/": Trả về view home
+- "/product" tả về view product.index ( có 1 vài sản phẩm mẫu , nút thêm mới sản phẩm sẫn đến form thêm mới sản phẩm,fix trên html)
+- "/product/add": Trả về view product.add( có form thêm mới sản phẩm)
+
+"/product/{id}": id kiểu hcuoosi , giá trị mặc định 123
+- gom nhóm "/product"
+- khi không tìm thấy route thì trả về trang error.404
+- ho 1 ví đặt tên route và gọi route qua tên
+- "/sinhvien/{name}/{mssv}": Trả về thông tin giới thiệu của sinh viên làm bài , name mặc định " Lương Xuân Hiếu", msssv mặc định "123456"
+- "/banco/{n}: trả về view ban co hiển thị 
