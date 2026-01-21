@@ -6,10 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>
-        Chi tiết sản phẩm
-    </h1>
-   ID: {{ $id }}
+    Home Page
 </body>
-
 </html>
