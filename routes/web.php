@@ -6,7 +6,11 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('home');
+    return view('home');
 });
+// Route::get('/',function(){
+//     return view('hello');
+// });
 // Route::get('/',function(){
 //     return view('hello');
 // });
@@ -31,7 +35,26 @@ Route::get('/', function () {
 // Route::get('/product/add',function(){
 //     return view('product.add');
 // })->name('add');
+// Route::get('/product/{id}',function(string $id){
+//     return"ID:".$id ;
+// });
+// Route::get('/product/{id?}',function(?string $id="anhngoc"){
+//     return"ID:".$id ;
+// });
+// Route::get('/test',function(){
+//     return response() -> json("hello World");
+// });
+// Route::get('/product', function () {
+//     return view('product.index');
+// })->name('product.index');
 
+// Route::get('/product/add',function(){
+//     return view('product.add');
+// })->name('add');
+
+// Route::get('/product/$id}',function($id){
+//     return view('product.detail',['id'=>$id]);
+// });
 // Route::get('/product/$id}',function($id){
 //     return view('product.detail',['id'=>$id]);
 // });
