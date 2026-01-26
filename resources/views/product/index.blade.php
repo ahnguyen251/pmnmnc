@@ -5,9 +5,27 @@
     <title>Danh sách sản phẩm</title>
 </head>
 <body>
+<h1>{{ $title }}</h1>
 
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($products as $product)
+        <tr>
+            <td>{{ $product['id'] }}</td>
+            <td>{{ $product['name'] }}</td>
+            <td>{{ number_format($product['price'], 0, ',', '.') }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 <h2>Danh sách sản phẩm</h2>
-
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
         <tr>
