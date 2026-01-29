@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('home');
@@ -69,6 +70,7 @@ Route::get('/', function () {
 //     // // })->name('detail');
 //     // Route::get('/detail/{id?}',[ProductController::class,'getDetail'])->name('detail');
 // });
+
 Route::prefix('product')->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('/', 'index')->name('product');
@@ -81,10 +83,14 @@ Route::prefix('auth')->group(function () {
     Route::controller(LoginController::class)->group(function () {
         Route::get('/login', 'login')->name('login');
         Route::post('/checkLogin', 'checkLogin')->name('checkLogin');
-        Route::get('/register', 'register')->name('register');
-        Route::post('/checkRegister', 'checkRegister')->name('checkRegister');
+    });
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('/signIn', 'signIn')->name('signIn');
+        Route::post('/checkSignIn', 'checkSignIn')->name('checkSignIn');
     });
 });
+
+
 Route::fallback(function () {
     return view('error.404');
 })->name('error.404');

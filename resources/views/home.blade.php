@@ -7,5 +7,6 @@
 </head>
 <body>
     Home Page
+    <a href="{{ route('signIn') }}">Sign In</a>
 </body>
 </html>
