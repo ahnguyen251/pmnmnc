@@ -68,9 +68,6 @@
     </tbody>
 </table>
 <div>
-<button type="button" onclick="window.location.href='{{ route('product.add')}}'">
-    Thêm sản phẩm
-</button>
 </div>
 </body>
 </html>

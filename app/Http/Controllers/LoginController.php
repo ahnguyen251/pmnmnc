@@ -10,14 +10,6 @@ class LoginController extends Controller
     {
         return view('login');
     }
-    public function register()
-    {
-        return view('register');
-    }
-    public function checkRegister(Request $request)
-    {
-        return "Register successfully";
-    }
     public function checkLogin(Request $request)
     {
         if ($request->input('username') == 'baobt' && $request->input('mssv') == '0001567') {
@@ -25,5 +17,14 @@ class LoginController extends Controller
         } else {
             return "Login failed";
         }
+    }
+     public function inputAge()
+    {
+        return view('inputAge');
+    }
+    public function checkAge(Request $request)
+    {
+        session()->put('age', $request->input('age'));
+        return redirect()->route('product');
     }
 }

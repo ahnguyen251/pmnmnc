@@ -7,8 +7,8 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('home');
-    return view('home');
-});
+
+})->middleware('checkAge');
 // Route::get('/',function(){
 //     return view('hello');
 // });
@@ -71,7 +71,9 @@ Route::get('/', function () {
 //     // Route::get('/detail/{id?}',[ProductController::class,'getDetail'])->name('detail');
 // });
 
-Route::prefix('product')->group(function () {
+Route::prefix('product')
+->middleware('checkAge')
+->group(function () {
     Route::controller(ProductController::class)->group(function () {
         Route::get('/', 'index')->name('product');
         Route::get('/add', 'add')->name('add');
@@ -83,6 +85,8 @@ Route::prefix('auth')->group(function () {
     Route::controller(LoginController::class)->group(function () {
         Route::get('/login', 'login')->name('login');
         Route::post('/checkLogin', 'checkLogin')->name('checkLogin');
+        Route::get('/inputAge', 'inputAge')->name('inputAge');
+        Route::post('/checkAge', 'checkAge')->name('checkAge');
     });
     Route::controller(AuthController::class)->group(function () {
         Route::get('/signIn', 'signIn')->name('signIn');
