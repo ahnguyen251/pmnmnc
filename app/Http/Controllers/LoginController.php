@@ -10,9 +10,12 @@ class LoginController extends Controller
     {
         return view('login');
     }
-    public function checkLogin(Request $request)
+        public function checkLogin(Request $request)
     {
-        if ($request->input('username') == 'baobt' && $request->input('mssv') == '0001567') {
+        $user = \App\Models\User::where('username', $request->input('username'))
+            ->where('mssv', $request->input('mssv'))
+            ->first();
+        if ($user) {
             return "Login successfully";
         } else {
             return "Login failed";
