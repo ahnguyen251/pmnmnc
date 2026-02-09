@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
-
+@extends('layout.admin')
+@section('content') 
 <body>
     <form action="{{ route('checkLogin') }}" method="post">
         @csrf
@@ -23,3 +24,4 @@
 </body>
 
 </html>
+@endsection
