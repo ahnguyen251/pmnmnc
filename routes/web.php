@@ -92,6 +92,9 @@ Route::prefix('auth')->group(function () {
         Route::get('/signIn', 'signIn')->name('signIn');
         Route::post('/checkSignIn', 'checkSignIn')->name('checkSignIn');
     });
+    Route::get('/register', [AuthController::class, 'signIn'])->name('register');
+    Route::post('/register', [AuthController::class, 'checkSignIn'])->name('checkRegister');
+
 });
 
 
@@ -105,4 +108,11 @@ Route::get('/sinhvien/{name?}/{mssv?}', function (?string $name = "Luong Xuan Hi
 
 Route::get('/banco/{n?}', function (?int $n = 8) {
     return view('banco', ['n' => $n]);
+});
+
+
+
+
+Route::get('/admin', function () {
+    return view('layout.admin');
 });
