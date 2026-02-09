@@ -12,7 +12,7 @@ class LoginController extends Controller
     }
     public function checkLogin(Request $request)
     {
-        if ($request->input('username') == 'anhntn' && $request->input('mssv') == '0001567') {
+        if ($request->input('username') == 'anhntn' && $request->input('mssv') == '0001467') {
             return "Login successfully";
         } else {
             return "Login failed";
