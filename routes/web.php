@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return view('home');
@@ -97,7 +98,19 @@ Route::prefix('auth')->group(function () {
 
 });
 
-
+Route::prefix('category')
+    ->group(function () {
+        Route::controller(CategoryController::class)->group(function () {
+            Route::get('/', 'index')->name('category');
+            Route::get('/add', 'create')->name('create_category');
+            Route::get('/detail/{id?}', 'getDetail')->name('detail_category');
+            Route::get('/edit/{id?}', 'edit')->name('edit_category');
+            Route::post('/store', 'store')->name('store_category');
+            Route::put('/update/{id?}', 'update')->name('update_category');
+            Route::get('/delete/{id?}', 'destroy')->name('delete_category');
+            Route::put('/active/{id?}', 'active')->name('active_category');
+        });
+ });
 Route::fallback(function () {
     return view('error.404');
 })->name('error.404');
