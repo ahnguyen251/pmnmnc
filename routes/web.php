@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerProductController;
 
 Route::get('/', function () {
     return view('home');
@@ -71,46 +72,77 @@ Route::get('/', function () {
 //     // // })->name('detail');
 //     // Route::get('/detail/{id?}',[ProductController::class,'getDetail'])->name('detail');
 // });
+Route::prefix('admin')->group(function () {
 
-Route::prefix('product')
-->middleware('checkAge')
-->group(function () {
-    Route::controller(ProductController::class)->group(function () {
-        Route::get('/', 'index')->name('product');
-        Route::get('/add', 'add')->name('add');
-        Route::get('/detail/{id?}', 'getDetail')->name('detail');
-        Route::post('/store', 'store');
-    });
-}); 
-Route::prefix('auth')->group(function () {
-    Route::controller(LoginController::class)->group(function () {
-        Route::get('/login', 'login')->name('login');
-        Route::post('/checkLogin', 'checkLogin')->name('checkLogin');
-        Route::get('/inputAge', 'inputAge')->name('inputAge');
-        Route::post('/checkAge', 'checkAge')->name('checkAge');
-    });
-    Route::controller(AuthController::class)->group(function () {
-        Route::get('/signIn', 'signIn')->name('signIn');
-        Route::post('/checkSignIn', 'checkSignIn')->name('checkSignIn');
-    });
-    Route::get('/register', [AuthController::class, 'signIn'])->name('register');
-    Route::post('/register', [AuthController::class, 'checkSignIn'])->name('checkRegister');
+    Route::prefix('product')
+        ->group(function () {
+            Route::controller(ProductController::class)->group(function () {
+                Route::get('/', 'index')->name('product');
+                Route::get('/add', 'create')->name('create_product');
+                Route::get('/detail/{id?}', 'getDetail')->name('detail_product');
+                Route::get('/edit/{id?}', 'edit')->name('edit_product');
+                Route::post('/store', 'store')->name('store_product');
+                Route::put('/update/{id?}', 'update')->name('update_product');
+                Route::get('/delete/{id?}', 'destroy')->name('delete_product');
+                Route::put('/active/{id?}', 'active')->name('active_product');
+            });
+        });
 
+    Route::prefix('category')
+        ->group(function () {
+            Route::controller(CategoryController::class)->group(function () {
+                Route::get('/', 'index')->name('category');
+                Route::get('/add', 'create')->name('create_category');
+                Route::get('/detail/{id?}', 'getDetail')->name('detail_category');
+                Route::get('/edit/{id?}', 'edit')->name('edit_category');
+                Route::post('/store', 'store')->name('store_category');
+                Route::put('/update/{id?}', 'update')->name('update_category');
+                Route::get('/delete/{id?}', 'destroy')->name('delete_category');
+                Route::put('/active/{id?}', 'active')->name('active_category');
+            });
+        });
+});
+Route::get('/product', [CustomerProductController::class, 'index'])->name('customer.product');
+
+Route::resource('test', TestController::class);
+Route::fallback(function () {
+    return view('error.404');
+})->name('404');
+
+
+Route::get('/sinhvien/{name?}/{mssv?}', function (?string $name = "Luong Xuan Hieu", ?string $mssv = "123456") {
+    return "Ho va ten: " . $name . "-MSSV: " . $mssv;
+});
+Route::get('/banco/{n?}', function (?int $n = 8) {
+    return view('banco', ['n' => $n]);
 });
 
-Route::prefix('category')
-    ->group(function () {
-        Route::controller(CategoryController::class)->group(function () {
-            Route::get('/', 'index')->name('category');
-            Route::get('/add', 'create')->name('create_category');
-            Route::get('/detail/{id?}', 'getDetail')->name('detail_category');
-            Route::get('/edit/{id?}', 'edit')->name('edit_category');
-            Route::post('/store', 'store')->name('store_category');
-            Route::put('/update/{id?}', 'update')->name('update_category');
-            Route::get('/delete/{id?}', 'destroy')->name('delete_category');
-            Route::put('/active/{id?}', 'active')->name('active_category');
-        });
- });
+// Route::prefix('product')
+// ->middleware('checkAge')
+// ->group(function () {
+//     Route::controller(ProductController::class)->group(function () {
+//         Route::get('/', 'index')->name('product');
+//         Route::get('/add', 'add')->name('add');
+//         Route::get('/detail/{id?}', 'getDetail')->name('detail');
+//         Route::post('/store', 'store');
+//     });
+// }); 
+// Route::prefix('auth')->group(function () {
+//     Route::controller(LoginController::class)->group(function () {
+//         Route::get('/login', 'login')->name('login');
+//         Route::post('/checkLogin', 'checkLogin')->name('checkLogin');
+//         Route::get('/inputAge', 'inputAge')->name('inputAge');
+//         Route::post('/checkAge', 'checkAge')->name('checkAge');
+//     });
+//     Route::controller(AuthController::class)->group(function () {
+//         Route::get('/signIn', 'signIn')->name('signIn');
+//         Route::post('/checkSignIn', 'checkSignIn')->name('checkSignIn');
+//     });
+//     Route::get('/register', [AuthController::class, 'signIn'])->name('register');
+//     Route::post('/register', [AuthController::class, 'checkSignIn'])->name('checkRegister');
+
+// });
+
 Route::fallback(function () {
     return view('error.404');
 })->name('error.404');
